@@ -15,6 +15,7 @@ nano Dockerfile
 
 Exemplo do que deve ter num arquivo Dockerfile, nesse exemplo já tem a configuração do nginx incluída, ou seja, não é necessário criar um arquivo nginx.conf:
 
+# Instalar Sistema Operacional
 FROM debian:11
 
 # Instalação do Debian e atualizações
