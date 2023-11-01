@@ -7,10 +7,10 @@ primeiramente criar uma pasta:
 mkdir docker
 isso é muito importante pelo fato de ser a pasta raiz da imagem, e nela vai ser inserido muitos elementos para a criação e uso dela
 
-depois entrar no diretório desta pasta:
+Depois entrar no diretório desta pasta:
 cd docker
 
-criar e entrar no arquivo de texto:
+Criar e entrar no arquivo de texto:
 nano Dockerfile
 
 Exemplo do que deve ter num arquivo Dockerfile, nesse exemplo já tem a configuração do nginx incluída, ou seja, não é necessário criar um arquivo nginx.conf:
@@ -158,47 +158,47 @@ CMD service php7.4-fpm start && nginx -g "daemon off;"
 
 Esse info.php, teste.php e o template serve de exemplo, pode ser outro arquivo ou pasta, porém ele precisa estar no mesmo diretório do Dockerfile, ou seja, na pasta raiz do projeto.
 
-estando no diretório onde se encontra o Dockerfile, usar esse comando para criar a imagem:
+Estando no diretório onde se encontra o Dockerfile, usar esse comando para criar a imagem:
 docker build -t balarotte/new_php .
 esse balarotte/new_php será o nome dado a imagem
 
-caso seja alterado algo do arquivo de texto Dockerfile é necessário usar o comando novamente para atualizar a imagem:
+Caso seja alterado algo do arquivo de texto Dockerfile é necessário usar o comando novamente para atualizar a imagem:
 docker build -t balarotte/new_php .
 
-para ver se a imagem foi criada:
+Para ver se a imagem foi criada:
 docker images
 
-para inicializar o container a partir da imagem:
+Para inicializar o container a partir da imagem:
 
 docker run -d --network=host -p 880:880 balarotte/new_php
 
-nesse comando tem a especificação das portas por conta do nginx, e essa questão do network=host é para o container ter acesso ao banco de dados da máquina local
+Nesse comando tem a especificação das portas por conta do nginx, e essa questão do network=host é para o container ter acesso ao banco de dados da máquina local
 
-para ver se o container existe:
+Para ver se o container existe:
 docker ps -a
 
-para ver se o container foi inicializado:
+Para ver se o container foi inicializado:
 docker ps
 
-para ver as logs do container:
+Para ver as logs do container:
 docker logs 637d5c0aace8
 esses números representa o id do container
 
-caso precise dar permissão para algum arquivo ou diretório de dentro do docker: 
+Caso precise dar permissão para algum arquivo ou diretório de dentro do docker: 
 docker exec -it eeebbe2f3aa5 chmod 777 -R /var/www/html/teste.php
 nessa parte onde tem vários números é o id do container
 
-para reiniciar o servidor nginx e php do container:
+Para reiniciar o servidor nginx e php do container:
 
 docker exec -it eeebbe2f3aa5 service php7.4-fpm restart
 docker exec -it eeebbe2f3aa5 nginx -s restart
 
-porém reiniciando o servidor nginx ele vai finalizar o container, para reiniciar o container é necessário fazer o comando:
+Porém reiniciando o servidor nginx ele vai finalizar o container, para reiniciar o container é necessário fazer o comando:
 
 docker start eeebbe2f3aa5
 docker start id_do_container
 
-para acessar o terminal em si do sistema operacional que foi instalado no container:
+Para acessar o terminal em si do sistema operacional que foi instalado no container:
 docker exec -it 2be0c92e0df3 /bin/bash
 
 ver os logs do nginx após entrar no terminal do sistema operacional do container:
@@ -207,12 +207,12 @@ cd /var/log/nginx
 
 tail -f error.log
 
-para reiniciar o servidor nginx e o php no próprio terminal do sistema operacional do container:
+Para reiniciar o servidor nginx e o php no próprio terminal do sistema operacional do container:
 
 service php7.4-fpm restart
 service nginx restart
 
-para sair do terminal do sistema operacional do container:
+Para sair do terminal do sistema operacional do container:
 exit
 
 Uma dica: instalar a extensão docker no visual studio code, pois com ela é possível dar start, excluir e ver os diretórios do container, o que ajuda muito
@@ -230,4 +230,4 @@ dentro do terminal do sistema operacional do container:
 
 service apache2 restart
 
-Siga o pdf com a documentação, que tudo funcionará d:) !
+d:) !
