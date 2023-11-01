@@ -1,3 +1,3 @@
 Docker + PHP + Adianti
 
-Seguir o pdf com a documentação, que tudo funcionará d:)!
+Siga o pdf com a documentação, que tudo funcionará d:) !
