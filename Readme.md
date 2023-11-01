@@ -145,7 +145,9 @@ RUN echo "user www-data;" > /etc/nginx/nginx.conf \
 
 # Copia o arquivo ou pasta para o diretório do container para rodar no navegador
 COPY info.php /var/www/html/
+
 COPY template/ /var/www/html/template/
+
 COPY teste.php /var/www/html
 
 # Exporta a porta 880 para o Nginx
@@ -182,7 +184,6 @@ para ver as logs do container:
 docker logs 637d5c0aace8
 esses números representa o id do container
 
-
 caso precise dar permissão para algum arquivo ou diretório de dentro do docker: 
 docker exec -it eeebbe2f3aa5 chmod 777 -R /var/www/html/teste.php
 nessa parte onde tem vários números é o id do container
@@ -203,6 +204,7 @@ docker exec -it 2be0c92e0df3 /bin/bash
 ver os logs do nginx após entrar no terminal do sistema operacional do container:
 
 cd /var/log/nginx
+
 tail -f error.log
 
 para reiniciar o servidor nginx e o php no próprio terminal do sistema operacional do container:
