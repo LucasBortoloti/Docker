@@ -3,14 +3,19 @@
 Comandos para criar uma imagem docker e utilizá-la num container:
 
 No terminal
+
 primeiramente criar uma pasta:
+
 mkdir docker
+
 isso é muito importante pelo fato de ser a pasta raiz da imagem, e nela vai ser inserido muitos elementos para a criação e uso dela
 
 Depois entrar no diretório desta pasta:
+
 cd docker
 
 Criar e entrar no arquivo de texto:
+
 nano Dockerfile
 
 Exemplo do que deve ter num arquivo Dockerfile, nesse exemplo já tem a configuração do nginx incluída, ou seja, não é necessário criar um arquivo nginx.conf:
