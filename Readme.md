@@ -59,7 +59,7 @@ RUN wget -O /usr/local/bin/phpunit-9.phar https://phar.phpunit.de/phpunit-9.0.ph
     chmod +x /usr/local/bin/phpunit-9.phar; \
     ln -s /usr/local/bin/phpunit-9.phar /usr/local/bin/phpunit
 
-## Configuração personalizada do PHP para Adianti
+# Configuração personalizada do PHP para Adianti
 # Set PHP custom settings
 RUN echo "\n# Custom settings"                                    >> /etc/php/7.4/fpm/php.ini \
     && echo "memory_limit = 256M"                                 >> /etc/php/7.4/fpm/php.ini \
