@@ -21,37 +21,46 @@ nano Dockerfile
 Exemplo do que deve ter num arquivo Dockerfile, nesse exemplo já tem a configuração do nginx incluída, ou seja, não é necessário criar um arquivo nginx.conf:
 
 # Instalar Sistema Operacional
+
 FROM debian:11
 
 # Instalação do Debian e atualizações
+
 RUN apt-get update
 RUN apt-get upgrade -y
 
 # Instalação de facilitadores
+
 RUN apt-get -y install locate mlocate wget apt-utils curl apt-transport-https lsb-release \
     ca-certificates software-properties-common zip unzip vim rpl apt-utils
 
 # Correção do 'add-apt-repository command not found'
+
 RUN apt-get install software-properties-common
 
 # Instalação do PHP-FPM
+
 RUN apt-get update && apt-get install -y \
     php7.4-fpm
 
 RUN apt-get install -y php7.4-mysqlnd
 
 #PHP Install PDO MySQL
+
 RUN apt-get -y install php7.4-pdo php7.4-pdo-mysql php7.4-mysql
 
 #Driver sqlite
+
 RUN apt-get -y install php7.4-sqlite3
 
 # Instalação do PHPUnit
+
 RUN wget -O /usr/local/bin/phpunit-9.phar https://phar.phpunit.de/phpunit-9.0.phar; \
     chmod +x /usr/local/bin/phpunit-9.phar; \
     ln -s /usr/local/bin/phpunit-9.phar /usr/local/bin/phpunit
 
 ## Configuração personalizada do PHP para Adianti
+
 # Set PHP custom settings
 RUN echo "\n# Custom settings"                                    >> /etc/php/7.4/fpm/php.ini \
     && echo "memory_limit = 256M"                                 >> /etc/php/7.4/fpm/php.ini \
@@ -73,18 +82,21 @@ RUN echo "\n# Security settings"                    >> /etc/php/7.4/fpm/php.ini 
     && echo "session.entropy_length = 32"           >> /etc/php/7.4/fpm/php.ini
 
 ## Instalação de pré-requisitos para o Drive SQL Server
+
 RUN apt-get -y install php7.4-dev php7.4-xml php7.4-intl unixodbc-dev
 
 # Definição da variável de ambiente ACCEPT_EULA
 ENV ACCEPT_EULA=Y
 
 # Configuração da chave GPG e lista de fontes para o repositório Microsoft SQL Server
+
 RUN curl -s https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl -s https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
 RUN apt-get update
 
 # Instalação de pacotes adicionais
+
 RUN apt-get install -y --no-install-recommends \
     locales \
     apt-transport-https \
@@ -92,22 +104,27 @@ RUN apt-get install -y --no-install-recommends \
     && locale-gen
 
 ## Instalação do Drive 5.9.0 para SQL Server
+
 RUN pecl install sqlsrv-5.9.0
 RUN pecl install pdo_sqlsrv-5.9.0
 
 # Configuração para PHP CLI
+
 RUN echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
 RUN echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
 
 # Configuração para PHP WEB
+
 RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.4/fpm/conf.d/30-pdo_sqlsrv.ini
 RUN echo "extension=sqlsrv.so" >> /etc/php/7.4/fpm/conf.d/20-sqlsrv.ini
 
 # Instalação do Nginx
+
 RUN apt-get update && apt-get install -y \
     nginx
 
 # Configuração do nginx.conf
+
 RUN echo "user www-data;" > /etc/nginx/nginx.conf \
     && echo "worker_processes 1;" >> /etc/nginx/nginx.conf \
     && echo "" >> /etc/nginx/nginx.conf \
@@ -149,6 +166,7 @@ RUN echo "user www-data;" > /etc/nginx/nginx.conf \
     && echo "}" >> /etc/nginx/nginx.conf
 
 # Copia o arquivo ou pasta para o diretório do container para rodar no navegador
+
 COPY info.php /var/www/html/
 
 COPY template/ /var/www/html/template/
@@ -156,9 +174,11 @@ COPY template/ /var/www/html/template/
 COPY teste.php /var/www/html
 
 # Exporta a porta 880 para o Nginx
+
 EXPOSE 880
 
 # Inicialização dos serviços
+
 CMD service php7.4-fpm start && nginx -g "daemon off;"
 
 Esse info.php, teste.php e o template serve de exemplo, pode ser outro arquivo ou pasta, porém ele precisa estar no mesmo diretório do Dockerfile, ou seja, na pasta raiz do projeto.
