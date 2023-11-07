@@ -180,6 +180,8 @@ EXPOSE 880
 
 CMD service php7.4-fpm start && nginx -g "daemon off;"
 
+# Comandos para iniciar o container Docker:
+
 Esse info.php, teste.php e o template serve de exemplo, pode ser outro arquivo ou pasta, porém ele precisa estar no mesmo diretório do Dockerfile, ou seja, na pasta raiz do projeto.
 
 Estando no diretório onde se encontra o Dockerfile, usar esse comando para criar a imagem:
