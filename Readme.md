@@ -1,6 +1,6 @@
 # Docker + PHP + Nginx + Adianti
 
-***Comandos para criar uma imagem docker e utilizá-la num container:***
+###Comandos para criar uma imagem docker e utilizá-la num container:###
 
 No terminal
 
