@@ -202,7 +202,7 @@ docker images
 
 docker run -d --network=host -p 880:880 balarotte/new_php
 
-**Nesse comando tem a especificação das portas por conta do nginx, e essa questão do network=host é para o container ter acesso ao banco de dados da máquina local**
+Nesse comando tem a especificação das portas por conta do nginx, e essa questão do network=host é para o container ter acesso ao banco de dados da máquina local
 
 **Para ver se o container existe:**
 
